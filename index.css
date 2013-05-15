@@ -1,8 +1,27 @@
+@media (max-width: 767px) {
+    .littleGallery {
+        min-height: 300px;
+        min-width: 500px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1179px) {
+    .littleGallery {
+        min-height: 500px;
+        min-width: 700px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .littleGallery {
+        min-height: 700px;
+        min-width: 900px;
+    }
+}
+
 .littleGallery {
     position: fixed;
     background: #2e2e2e;
-    min-width: 900px;
-    min-height: 700px;
     box-shadow: 0 0 9px 2px #333;
     border-radius: 3px;
     border: 1px solid #333;
