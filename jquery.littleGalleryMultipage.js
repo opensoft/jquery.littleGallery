@@ -183,11 +183,7 @@
                 gallery.find('.littleGallery-head .littleGallery-img').removeClass('littleGallery-img-active');
                 $(this).addClass('littleGallery-img-active');
 
-                if (arrayImages[urlImg] && gallery.find('.littleGallery-head .littleGallery-img').length != 1) {
-                    gallery.find('.littleGallery-body .littleGallery-container').empty();
-                } else if (arrayImages[urlImg]){
-                    return;
-                }
+                gallery.find('.littleGallery-body .littleGallery-container').empty();
 
                 if (arrayImages[urlImg]) {
                     gallery.find('.littleGallery-body .littleGallery-container').html('<img class="littleGallery-img" src="' + urlImg + '">').hide().fadeIn();
