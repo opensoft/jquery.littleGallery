@@ -85,6 +85,14 @@
                 headHtml += '<span class="littleGallery-img" data="' + data.uv_back.url + '">' + data.uv_back.name + '</span>';
             }
 
+            if (data.variable_uv_front) {
+                headHtml += '<span class="littleGallery-img" data="' + data.variable_uv_front.url + '">' + data.variable_uv_front.name + '</span>';
+            }
+
+            if (data.variable_uv_back) {
+                headHtml += '<span class="littleGallery-img" data="' + data.variable_uv_back.url + '">' + data.variable_uv_back.name + '</span>';
+            }
+
             gallery.find('.littleGallery-head').html(headHtml);
 
             $(window).on('resize', function () {
