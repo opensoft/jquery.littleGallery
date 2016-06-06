@@ -90,7 +90,7 @@
                 if (i == 0) {
                     collectionHtml += ' ' + activeItem;
                 }
-                collectionHtml += '">' + (i + 1) + '</div>';
+                collectionHtml += '">' + item.label + '</div>';
             });
 
             gallery.find('.littleGallery-collection').html(collectionHtml);
