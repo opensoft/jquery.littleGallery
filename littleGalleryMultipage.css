@@ -32,7 +32,7 @@
 .littleGallery .littleGallery-body .littleGallery-container {
     text-align: center;
     vertical-align: middle;
-    padding-left: 80px;
+    float: left;
     min-height: 100%;
 }
 .littleGallery .littleGallery-body .littleGallery-img {
@@ -59,7 +59,6 @@
 }
 .littleGallery .littleGallery-collection {
     height: inherit;
-    width: 80px;
     overflow: auto;
     float: left;
 }
