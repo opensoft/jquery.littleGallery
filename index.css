@@ -68,7 +68,7 @@
     vertical-align: middle;
 }
 
-.littleGallery .littleGallery-body .littleGallery-notFound {
+.littleGallery .littleGallery-body .littleGallery-error {
     font-size: 22px;
     color: #999;
     font-style: normal;

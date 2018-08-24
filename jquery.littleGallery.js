@@ -21,7 +21,8 @@
             data: {},
             marginWindow: {top: 50, left: 50},
             paddingImage: {top: 0, left: 0},
-            circularShift: true
+            circularShift: true,
+            defaultMessageForEmptyData: 'Image not found'
         }, options);
 
         var arrayImages = [];
@@ -61,6 +62,8 @@
         };
 
         var init = function () {
+            var data = options.data;
+
             $('body').append('<div class="littleGallery">'
                 + '<i class="littleGallery-img-close"></i>'
                 + '<div class="littleGallery-head"></div>'
@@ -71,29 +74,19 @@
 
             gallery = $('.littleGallery');
 
-            var headHtml = '<span class="littleGallery-img" data="' + data.front.url + '">' + data.front.name + '</span>';
-
-            if (data.back) {
-                headHtml += '<span class="littleGallery-img" data="' + data.back.url + '">' + data.back.name + '</span>';
+            if (!$.isEmptyObject(data)) {
+                var headHtml = '';
+                $.each(data, function(key, file) {
+                    if (file.url !== undefined && file.name !== undefined) {
+                        headHtml += '<span class="littleGallery-img" data="' + file.url + '">' + file.name + '</span>';
+                    }
+                });
+                gallery.find('.littleGallery-head').html(headHtml);
+            } else {
+                gallery.find('.littleGallery-body .littleGallery-container').html(
+                    '<i class="littleGallery-error">' + options.defaultMessageForEmptyData + '</i>'
+                ).hide().fadeIn();
             }
-
-            if (data.uv_front) {
-                headHtml += '<span class="littleGallery-img" data="' + data.uv_front.url + '">' + data.uv_front.name + '</span>';
-            }
-
-            if (data.uv_back) {
-                headHtml += '<span class="littleGallery-img" data="' + data.uv_back.url + '">' + data.uv_back.name + '</span>';
-            }
-
-            if (data.variable_uv_front) {
-                headHtml += '<span class="littleGallery-img" data="' + data.variable_uv_front.url + '">' + data.variable_uv_front.name + '</span>';
-            }
-
-            if (data.variable_uv_back) {
-                headHtml += '<span class="littleGallery-img" data="' + data.variable_uv_back.url + '">' + data.variable_uv_back.name + '</span>';
-            }
-
-            gallery.find('.littleGallery-head').html(headHtml);
 
             $(window).on('resize', function () {
                 resize();
@@ -197,7 +190,7 @@
                     });
 
                     $(tmp).on('error', function () {
-                        gallery.find('.littleGallery-body .littleGallery-container').html('<i class="littleGallery-notFound">Image not found</i>').hide().fadeIn();
+                        gallery.find('.littleGallery-body .littleGallery-container').html('<i class="littleGallery-error">Image not found</i>').hide().fadeIn();
                         flagResize = true;
                         resize();
                     });
