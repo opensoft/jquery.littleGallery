@@ -21,7 +21,8 @@
             data: {},
             marginWindow: {top: 50, left: 50},
             paddingImage: {top: 0, left: 0},
-            circularShift: true
+            circularShift: true,
+            defaultMessageForEmptyData: 'Image not found'
         }, options);
 
         var arrayImages = [];
@@ -61,7 +62,8 @@
         };
 
         var init = function () {
-            var firstPDF = data[0];
+            var data = options.data;
+            var firstObject = data[0];
 
             $('body').append('<div class="littleGallery">'
                 + '<i class="littleGallery-img-close"></i>'
@@ -74,14 +76,20 @@
 
             gallery = $('.littleGallery');
 
-            var headHtml = '<span class="littleGallery-img littleGallery-img-front" data="' + firstPDF.front + '">Front</span>';
-
-            if (firstPDF.back) {
-                headHtml += '<span class="littleGallery-img littleGallery-img-back" data="' + firstPDF.back + '">Back</span>';
+            if (!$.isEmptyObject(firstObject)) {
+                var headHtml = '';
+                if (firstObject.front) {
+                    headHtml += '<span class="littleGallery-img littleGallery-img-front" data="' + firstObject.front + '">Front</span>';
+                }
+                if (firstObject.back) {
+                    headHtml += '<span class="littleGallery-img littleGallery-img-back" data="' + firstObject.back + '">Back</span>';
+                }
+                gallery.find('.littleGallery-head').html(headHtml);
+            } else {
+                gallery.find('.littleGallery-body .littleGallery-container').html(
+                    '<i class="littleGallery-notFound">' + options.defaultMessageForEmptyData + '</i>'
+                ).hide().fadeIn();
             }
-
-            gallery.find('.littleGallery-head').html(headHtml);
-
 
             var collectionHtml = '';
             var activeItem = 'collection-item-active';
@@ -209,7 +217,7 @@
                     });
 
                     $(tmp).on('error', function () {
-                        gallery.find('.littleGallery-body .littleGallery-container').html('<i class="littleGallery-notFound">Image not found</i>').hide().fadeIn();
+                        gallery.find('.littleGallery-body .littleGallery-container').html('<i class="littleGallery-error">Image not found</i>').hide().fadeIn();
                         flagResize = true;
                         resize();
                     });
